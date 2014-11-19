@@ -1,16 +1,15 @@
 #include <Adafruit_NeoPixel.h>
 #include "hardware.h"
-#define PIN 9
+#include "clock.h"
 
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(60, PIN, NEO_GRB + NEO_KHZ800);
+Hardware &hardware = Hardware::getInstance();
+Clock    &clock    = Clock::getInstance();
 
 void setup() {
-  strip.begin();
-  strip.show(); // Initialize all pixels to 'off'
+  hardware.setup();
+  clock.setup();
 }
 
 void loop() {
-  Hardware::getInstance().redLoop(strip, 50);
-  // colorWipe(strip, strip.Color(255, 0, 0), 50); // Red
-  // colorWipe(strip, strip.Color(0, 0, 0), 50); // Black
+  hardware.redLoop(50);
 }
